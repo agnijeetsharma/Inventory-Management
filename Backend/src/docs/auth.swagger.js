@@ -17,15 +17,11 @@
  *         application/json:
  *           schema:
  *             type: object
- *             required: [username, email, password]
+ *             required: [username, password]
  *             properties:
  *               username:
  *                 type: string
  *                 example: puja
- *               email:
- *                 type: string
- *                 format: email
- *                 example: puja@example.com
  *               password:
  *                 type: string
  *                 example: mypassword
@@ -33,11 +29,10 @@
  *       201:
  *         description: User registered successfully
  *       409:
- *         description: Username or email already exists
+ *         description: Username already exists
  *       400:
  *         description: Validation error
  */
-
 
 /**
  * @swagger

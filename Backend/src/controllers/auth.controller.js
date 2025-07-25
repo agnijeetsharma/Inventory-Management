@@ -22,19 +22,18 @@ const generateAccessTokenAndRefreshToken = async (userId) => {
   }
 };
 const registerUser = asyncHandler(async (req, res) => {
-  const { username,email, password } = req.body;
+  const { username, password } = req.body;
   if (
-    [username,email, password].some((field) => field?.trim() === "")
+    [username, password].some((field) => field?.trim() === "")
   ) {
     throw apiError(400, "All fields are requried");
   }
-  const existedUser = User.findOne({ $or: [{ username },{email}] });
+  const existedUser = User.findOne({ $or: [{ username}] });
   if (!existedUser) {
     throw new apiError(409, "User should have unique details");
   }
   const user = await User.create({
     username: username?.toLowerCase(),
-    email: email?.toLowerCase(),
     password,
   });
   const createdUser = await User.findById(user._id).select(
