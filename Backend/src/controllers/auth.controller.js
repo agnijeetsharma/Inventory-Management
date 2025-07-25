@@ -45,13 +45,13 @@ const registerUser = asyncHandler(async (req, res) => {
     throw new apiError(500, "Something went wrong ,try after some time!");
   }
   return res
-    .status(200)
-    .json(new apiResponse(200, createdUser, "user registered successfully"));
+    .status(201)
+    .json(new apiResponse(201, createdUser, "user registered successfully"));
 });
 
 const loginUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
-  if (!email && !password)
+  if (!username&& !password)
     throw new apiError(400, "Valid information not found");
 
   const user = await User.findOne({
@@ -79,7 +79,6 @@ const loginUser = asyncHandler(async (req, res) => {
       new apiResponse(
         200,
         {
-          user: loggedInUser,
           accessToken,
           refreshToken,
         },
