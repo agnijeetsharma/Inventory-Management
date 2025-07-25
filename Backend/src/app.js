@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true, limit: "18kb" }));
 app.use(express.static("public"));                     
 app.use(cookieParser());  
 
-app.use('/api/auth', authRoutes); 
+app.use('/api/v1/auth', authRoutes); 
 
       
 

@@ -81,5 +81,4 @@ userSchema.methods.refreshAccessToken = function () {
   );
 };
 
-l;
 export const User = mongoose.model("User", userSchema);
