@@ -1,9 +1,8 @@
 import asyncHandler from "../utils/asyncHandler.js";
 import apiError from "../utils/apiErrors.js";
-import {User }from "../models/user.model.js";
+import { User } from "../models/user.model.js";
 import { apiResponse } from "../utils/apiResponse.js";
 import jwt from "jsonwebtoken";
-
 
 const generateAccessTokenAndRefreshToken = async (userId) => {
   try {
@@ -17,18 +16,16 @@ const generateAccessTokenAndRefreshToken = async (userId) => {
   } catch (err) {
     throw new apiError(
       500,
-      "something went wrong when generating access and refresh token",
+      "something went wrong when generating access and refresh token"
     );
   }
 };
 const registerUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
-  if (
-    [username, password].some((field) => field?.trim() === "")
-  ) {
+  if ([username, password].some((field) => field?.trim() === "")) {
     throw apiError(400, "All fields are requried");
   }
-  const existedUser = User.findOne({ $or: [{ username}] });
+  const existedUser = User.findOne({ $or: [{ username }] });
   if (!existedUser) {
     throw new apiError(409, "User should have unique details");
   }
@@ -37,7 +34,7 @@ const registerUser = asyncHandler(async (req, res) => {
     password,
   });
   const createdUser = await User.findById(user._id).select(
-    "-password  -refreshToken",
+    "-password  -refreshToken"
   );
 
   if (!createdUser) {
@@ -50,41 +47,39 @@ const registerUser = asyncHandler(async (req, res) => {
 
 const loginUser = asyncHandler(async (req, res) => {
   const { username, password } = req.body;
-  if (!username&& !password)
+
+  if (!username || !password) {
     throw new apiError(400, "Valid information not found");
+  }
 
   const user = await User.findOne({
     $or: [{ username }],
   });
 
   if (!user) throw new apiError(400, "User not found");
+
   const isPasswordCorrect = await user.isPasswordCorrect(password);
   if (!isPasswordCorrect) throw new apiError(400, "Password is not correct");
+
   const { accessToken, refreshToken } =
     await generateAccessTokenAndRefreshToken(user._id);
-  // console.log("this is refrehToken==",refreshToken)
-  const loggedInUser = await User.findById(user._id).select(
-    "-password -refrenshToken",
-  );
+
+  const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
+
   const option = {
     httpOnly: true,
     secure: true,
   };
+
   return res
     .status(200)
     .cookie("accessToken", accessToken, option)
     .cookie("refreshToken", refreshToken, option)
-    .json(
-      new apiResponse(
-        200,
-        {
-          accessToken,
-          refreshToken,
-        },
-        "User logged In successfully",
-      ),
-    );
+    .json({
+      access_token: accessToken, 
+    });
 });
+
 const logOutUser = asyncHandler(async (req, res) => {
   await User.findByIdAndDelete(
     req.user._id,
@@ -95,7 +90,7 @@ const logOutUser = asyncHandler(async (req, res) => {
     },
     {
       new: true,
-    },
+    }
   );
   const option = {
     httpOnly: true,
@@ -115,7 +110,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   try {
     const decodeToken = await jwt.verify(
       incomingRefreshToken,
-      process.env.ACCESS_TOKEN_SECRET,
+      process.env.ACCESS_TOKEN_SECRET
     );
 
     const user = User.findById(decodeToken._id);
@@ -136,18 +131,11 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
       .json(
         200,
         { accessToken, refreshToken: newRefreshToken },
-        "refreshToken updatede successfully",
+        "refreshToken updatede successfully"
       );
   } catch (err) {
     throw new apiError(401, "Something is wrong");
   }
 });
 
-
-
-export {
-  loginUser,
-  registerUser,
-  logOutUser,
-  refreshAccessToken
-};
+export { loginUser, registerUser, logOutUser, refreshAccessToken };
