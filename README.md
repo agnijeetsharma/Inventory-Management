@@ -171,7 +171,8 @@ Ensure the backend is running at http://localhost:8080.
 
 ## 📬 Postman Collection
 
-You can test the APIs using this [Postman Collection](./docs/Inventory Management API..postman_collection.json):
+You can test the APIs using this [Postman Collection](./docs/Inventory%20Management%20API..postman_collection.json).
+
 
 To import:
 - Open Postman
