@@ -4,8 +4,8 @@ import { app } from './app.js';
 dotenv.config({ path: './.env' }); 
 connectdb()
   .then(() => {
-    const port = process.env.PORT || 8000;
-    app.listen(port, () => {
+    const port = process.env.PORT || 8080;
+    app.listen(port,"0.0.0.0", () => {
       console.log(`Server started at port: ${port}`);
     });
   })

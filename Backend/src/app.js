@@ -13,16 +13,19 @@ import swaggerSpec from './config/swagger.js';
 const app = express();
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN || "*",  
-    credentials: true,
+  origin: 'http://localhost:8000' ||"*",
+
+  credentials: true,
+ methods: ["GET", "POST", "PUT", "DELETE"],
+
 }));
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(express.json());
 app.use(express.json({ limit: "19kb" }));
-app.use(express.urlencoded({ extended: true, limit: "18kb" }));
-app.use(express.static("public"));                     
+                 
 app.use(cookieParser());  
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1/auth', authRoutes); 
 app.use('/api/v1/products', productRoutes);

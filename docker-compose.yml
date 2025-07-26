@@ -1,0 +1,37 @@
+
+
+services:
+  mongo:
+    image: mongo
+    container_name: ims-mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  backend:
+    build: ./Backend
+    container_name: ims-backend
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - MONGODB_URI=mongodb+srv://agnijeetsharma:jK3IouqFABn2hKcg@cluster0.tddqvur.mongodb.net
+      - ACCESS_TOKEN_SECRET=eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyf
+      - ACCESS_TOKEN_EXPIRY=1d
+      - REFRESH_TOKEN_SECRET=ibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5M
+      - REFRESH_TOKEN_EXPIRY=10d
+      - CORS_ORIGIN=*
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./Frontend
+    container_name: ims-frontend
+    ports:
+      - "8000:80"
+    depends_on:
+      - backend
+
+volumes:
+  mongo-data:

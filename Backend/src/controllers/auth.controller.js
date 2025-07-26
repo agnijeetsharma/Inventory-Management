@@ -21,6 +21,7 @@ const generateAccessTokenAndRefreshToken = async (userId) => {
   }
 };
 const registerUser = asyncHandler(async (req, res) => {
+// console.log("Registering user with data:", req.body);
   const { username, password } = req.body;
   if ([username, password].some((field) => field?.trim() === "")) {
     throw apiError(400, "All fields are requried");
