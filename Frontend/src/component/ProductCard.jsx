@@ -24,8 +24,8 @@ const ProductCards = ({ product, onQuantityUpdate }) => {
         <input
           type="number"
           min="0"
-          placeholder="Update Qty"
-          className="px-3 py-1.5 border border-gray-300 rounded-lg w-28 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Update Qty.."
+          className="px-4 py-1.5 border border-gray-300 rounded-lg w-32 focus:outline-none focus:ring-2 focus:ring-blue-500"
           onBlur={(e) => onQuantityUpdate(product._id, e.target.value)}
         />
       </div>

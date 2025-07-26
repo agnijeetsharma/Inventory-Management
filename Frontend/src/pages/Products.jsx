@@ -13,11 +13,11 @@ const Products = () => {
     try {
       const res = await getProducts(pageNum);
 
-      // Defensive fallback depending on backend response structure
+      
       const data = Array.isArray(res.data)
         ? res.data
         : res.data?.products || [];
-
+      console.log("Fetched products:", data);
       setProducts(data);
       setPage(pageNum);
       setError("");
