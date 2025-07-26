@@ -11,28 +11,25 @@ A full-stack Inventory Management System built using:
 ## 🚀 Features
 
 ### 🔐 Authentication
-
 - Register and Login (JWT-based)
 - Secure password hashing using Bcrypt
 - Refresh token mechanism
 - Authorization middleware for protected routes
 
 ### 📦 Product Management
-
-- Add a new product
+- Add new products
 - Update product quantity
-- Paginated listing of products
+- Paginated product listing
 - Optional fields: `image_url`, `description`
 
 ### 📄 API Documentation
-
-- Available at: `http://localhost:8080/api-docs`
+- Swagger available at: [`http://localhost:8080/api-docs`](http://localhost:8080/api-docs)
 - Implemented using Swagger (OpenAPI v3)
 
 ---
 
 ## 🏗️ Project Structure
-
+```
 Inventory-Management/
 ├── Backend/
 │ ├── src/
@@ -56,31 +53,32 @@ Inventory-Management/
 │
 ├── docker-compose.yml
 └── README.md
-
+```
 
 
 ---
 
-## ⚙️ Running Locally (with Docker)
+## ⚙️ Running Locally with Docker
 
 ### 📋 Requirements
-
-- Docker & Docker Compose installed
+- [Docker](https://www.docker.com/) & [Docker Compose](https://docs.docker.com/compose/) installed
 
 ---
 
-### 🔧 Step-by-Step
+### 🧭 Setup Steps
 
 1. **Clone the Repository**
 
-```bash
+
+```
 git clone https://github.com/agnijeetsharma/Inventory-Management.git
+```
 cd Inventory-Management
+Configure Environment Variables
 
-Set Environment Variables
+Create a .env file in the Backend/ folder with the following:
 
-Update Backend/.env file as follows:
-
+```
 PORT=8080
 MONGODB_URI=mongodb://mongo:27017/ims
 ACCESS_TOKEN_SECRET=your_secret_access
@@ -88,38 +86,49 @@ REFRESH_TOKEN_SECRET=your_secret_refresh
 ACCESS_TOKEN_EXPIRY=1d
 REFRESH_TOKEN_EXPIRY=7d
 CORS_ORIGIN=http://localhost:8000
-No .env is required for frontend unless you use custom API URLs.
+```
+No .env is required for the frontend unless you're customizing the API base URL.
 
-Run Everything
+Start the Application
 
+```
 docker-compose up --build
-
+```
 🔍 API Endpoints
+```
 Endpoint	Method	Description
-/api/v1/auth/register	POST	Register new user
-/api/v1/auth/login	POST	Login user
-/api/v1/products	GET	Get products with pagination
-/api/v1/products	POST	Add new product
-/api/v1/products/:id/quantity	PUT	Update quantity
+/api/v1/auth/register	POST	Register a new user
+/api/v1/auth/login	POST	Login and get tokens
+/api/v1/products	GET	Get paginated list of products
+/api/v1/products	POST	Add a new product
+/api/v1/products/:id/quantity	PUT	Update quantity of a product
+```
 
-📘 Swagger Docs: http://localhost:8080/api-docs
+📘 Swagger UI:
+```
+http://localhost:8080/api-docs
+```
 
 🌐 Frontend
-Runs on: http://localhost:8000
 
-Built with Vite + React + Tailwind CSS
+URL:
+```
+http://localhost:8000
+```
 
-Features:
+Built with React, Vite, and Tailwind CSS
 
-Authenticated access
+Frontend Features
+Authenticated login system
+
+Product listing with pagination
 
 Add product form
 
-Quantity update
-
-Pagination UI
+Update product quantity UI
 
 🐳 Docker Compose Overview
+```
 yaml
 Copy
 Edit
@@ -149,11 +158,13 @@ services:
 
 volumes:
   mongo-data:
+```
 🧪 API Testing
-Use the provided test_api.py script in the Backend folder to test endpoints.
+Run the Python test script to validate all endpoints:
 
-
+bash
+Copy
+Edit
+cd Backend
 python test_api.py
-
-Make sure server is running on localhost:8080.
-
+Ensure the backend is running at http://localhost:8080.
