@@ -162,9 +162,19 @@ volumes:
 🧪 API Testing
 Run the Python test script to validate all endpoints:
 
-bash
-Copy
-Edit
+
 cd Backend
+```
 python test_api.py
+```
 Ensure the backend is running at http://localhost:8080.
+
+## 📬 Postman Collection
+
+You can test the APIs using this [Postman Collection](./docs/Inventory-Management.postman_collection.json):
+
+To import:
+- Open Postman
+- Click `Import`
+- Select the `.json` file
+
