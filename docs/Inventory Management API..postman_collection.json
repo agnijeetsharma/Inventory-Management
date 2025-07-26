@@ -1,0 +1,176 @@
+{
+	"info": {
+		"_postman_id": "282a0e9b-0043-4fa5-8abc-c2a80e4e26a6",
+		"name": "Inventory Management API.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37167843"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"puja\",\r\n  \"password\": \"mypassword\"\r\n}\r\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/auth/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "\"agni@gmail.com\"",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "password",
+							"value": "Agni@1234",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "abhi",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Product",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "Laptop",
+							"type": "text"
+						},
+						{
+							"key": "type",
+							"value": "Electronics",
+							"type": "text"
+						},
+						{
+							"key": "sku",
+							"value": "LAP-002",
+							"type": "text"
+						},
+						{
+							"key": "image_url",
+							"value": "https://cdn.mos.cms.futurecdn.net/9vvsKLN4WyueSMsnAdWq6T-970-80.jpg.webp",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Latest Laptop",
+							"type": "text"
+						},
+						{
+							"key": "quantity",
+							"value": "10",
+							"type": "text"
+						},
+						{
+							"key": "price",
+							"value": "56000",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/products",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"products"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "product-quantity",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/api/v1/688394c0c3e976715a519b86/18",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"v1",
+						"688394c0c3e976715a519b86",
+						"18"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get-product",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
